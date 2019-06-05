@@ -1,4 +1,3 @@
-"""
 import numpy as np
 import os
 import six.moves.urllib as urllib
@@ -13,6 +12,9 @@ from matplotlib import pyplot as plt
 from PIL import Image
 import os
 import glob
+
+sys.path.append("/home/alvaro/Área de Trabalho/TensforFlowAPI/models/research/object_detection")
+
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
 PATH_TO_CKPT = '/home/alvaro/Downloads/tf_saved_model/frozen_inference_graph.pb'
@@ -144,5 +146,3 @@ for image_path in TEST_IMAGE_PATHS:
     plt.imshow(image_np)
     plt.savefig('resultado' + str(count) +'.png')
     count += 1
-"""
-print('funcionaaaaaaaaaaaaaaaaaaa')
