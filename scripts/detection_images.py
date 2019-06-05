@@ -1,3 +1,4 @@
+"""
 import numpy as np
 import os
 import six.moves.urllib as urllib
@@ -143,3 +144,5 @@ for image_path in TEST_IMAGE_PATHS:
     plt.imshow(image_np)
     plt.savefig('resultado' + str(count) +'.png')
     count += 1
+"""
+print('funcionaaaaaaaaaaaaaaaaaaa')
