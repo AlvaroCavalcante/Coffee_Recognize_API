@@ -25,10 +25,6 @@ exports.processImage = (req, res, next) => {
             console.log(`${data}`);
         });
 
-        pythonProcess.stderr.on('data', (data) => {
-            console.log(`-------------- ERRO -----------------\n${data}`);
-
-        });
 
         pythonProcess.on('close', (code) => {
             console.log(`--------------- SERVIÇO CONCLUÍDO ---------------------\nCÓDIGO: ${code}`);

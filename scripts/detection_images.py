@@ -13,9 +13,6 @@ from PIL import Image
 import os
 import glob
 
-sys.path.append("/home/alvaro/Área de Trabalho/TensforFlowAPI/models/research/object_detection")
-
-
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
 PATH_TO_CKPT = '/home/alvaro/Downloads/tf_saved_model/frozen_inference_graph.pb'
 
@@ -23,7 +20,7 @@ PATH_TO_CKPT = '/home/alvaro/Downloads/tf_saved_model/frozen_inference_graph.pb'
 PATH_TO_LABELS = '/home/alvaro/Downloads/tf_saved_model/label_map.pbtxt'
 
 # If you want to test the code with your images, just add images files to the PATH_TO_TEST_IMAGES_DIR.
-PATH_TO_TEST_IMAGES_DIR =  '/home/alvaro/Documentos/object_detection_demo/test'
+PATH_TO_TEST_IMAGES_DIR =  '/home/alvaro/Área de Trabalho/tcc_api/uploads'
 
 assert os.path.isfile('/home/alvaro/Downloads/tf_saved_model/frozen_inference_graph.pb')
 assert os.path.isfile(PATH_TO_LABELS)
@@ -31,8 +28,9 @@ TEST_IMAGE_PATHS = glob.glob(os.path.join(PATH_TO_TEST_IMAGES_DIR, "*.*"))
 assert len(TEST_IMAGE_PATHS) > 0, 'No image found in `{}`.'.format(PATH_TO_TEST_IMAGES_DIR)
 print(TEST_IMAGE_PATHS)
 
-# This is needed since the notebook is stored in the object_detection folder.
-#sys.path.append("..")
+sys.path.append("/home/alvaro/Área de Trabalho/TensforFlowAPI/models/research/object_detection")
+sys.path.append("/home/alvaro/Área de Trabalho/TensforFlowAPI/models/research")
+
 from object_detection.utils import ops as utils_ops
 
 
