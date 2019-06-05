@@ -142,5 +142,5 @@ for image_path in TEST_IMAGE_PATHS:
         line_thickness=8)
     plt.figure(figsize=IMAGE_SIZE)
     plt.imshow(image_np)
-    plt.savefig('resultado' + str(count) +'.png')
+    plt.savefig('resultados/resultado' + str(count) +'.png')
     count += 1
