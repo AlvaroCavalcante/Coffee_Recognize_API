@@ -27,5 +27,6 @@ const upload = multer({
 
 
 router.post('/upload', upload.single('file'), pictureController.uploadAnexo);
+router.post('/process', pictureController.processImage);
 
 module.exports = router;
