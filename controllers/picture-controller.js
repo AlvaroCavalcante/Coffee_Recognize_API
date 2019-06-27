@@ -16,7 +16,7 @@ exports.uploadAnexo = (req, res, next) => {
 
 exports.processImage = (req, res, next) => {
     try {
-        const pythonProcess = spawn('python3', ["scripts/detection_images.py", req.params.id_screening]);
+        const pythonProcess = spawn('python3', ["scripts/detection_images.py"]);
         //result.pid = pythonProcess.pid
 
         console.log(`--------------- SERVIÇO INICIADO ---------------------\n`);
