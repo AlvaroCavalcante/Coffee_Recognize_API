@@ -20,6 +20,7 @@ const fileFilter = (req, file, cb) => {
         cb(new Error('Formato do arquivo inválido, permitido apenas jpg ou png'), false)
     }
 };
+
 const upload = multer({
     storage: storage,
     fileFilter: fileFilter

@@ -20,10 +20,11 @@ PATH_TO_CKPT = './graphs/frozen_inference_graph.pb'
 PATH_TO_LABELS = './graphs/label_map.pbtxt'
 
 # If you want to test the code with your images, just add images files to the PATH_TO_TEST_IMAGES_DIR.
-PATH_TO_TEST_IMAGES_DIR =  '/home/alvaro/Área de Trabalho/tcc_api/uploads'
+PATH_TO_TEST_IMAGES_DIR =  './uploads'
 
 assert os.path.isfile('./graphs/frozen_inference_graph.pb')
 assert os.path.isfile(PATH_TO_LABELS)
+
 TEST_IMAGE_PATHS = glob.glob(os.path.join(PATH_TO_TEST_IMAGES_DIR, "*.*"))
 assert len(TEST_IMAGE_PATHS) > 0, 'No image found in `{}`.'.format(PATH_TO_TEST_IMAGES_DIR)
 print(TEST_IMAGE_PATHS)
@@ -33,10 +34,8 @@ sys.path.append("/home/alvaro/Área de Trabalho/TensforFlowAPI/models/research")
 
 from object_detection.utils import ops as utils_ops
 
-
 # This is needed to display the images.
 #%matplotlib inline
-
 
 from object_detection.utils import label_map_util
 
@@ -142,5 +141,6 @@ for image_path in TEST_IMAGE_PATHS:
         line_thickness=8)
     plt.figure(figsize=IMAGE_SIZE)
     plt.imshow(image_np)
+    
     plt.savefig('resultados/resultado' + str(count) +'.png')
     count += 1
