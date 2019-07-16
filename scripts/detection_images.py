@@ -27,7 +27,6 @@ assert os.path.isfile(PATH_TO_LABELS)
 
 TEST_IMAGE_PATHS = glob.glob(os.path.join(PATH_TO_TEST_IMAGES_DIR, "*.*"))
 assert len(TEST_IMAGE_PATHS) > 0, 'No image found in `{}`.'.format(PATH_TO_TEST_IMAGES_DIR)
-print(TEST_IMAGE_PATHS)
 
 sys.path.append("/home/alvaro/Área de Trabalho/TensforFlowAPI/models/research/object_detection")
 sys.path.append("/home/alvaro/Área de Trabalho/TensforFlowAPI/models/research")
