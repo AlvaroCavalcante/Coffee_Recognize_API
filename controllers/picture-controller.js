@@ -8,9 +8,7 @@ exports.uploadAnexo = (req, res, next) => {
         })
     }
     else {
-        res.status(201).send({
-            message: 'Anexo incluído com sucesso.'
-        })
+        next();
     }
 };
 
