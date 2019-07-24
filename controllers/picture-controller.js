@@ -63,3 +63,9 @@ exports.deleteFiles = (req, res, next) => {
 
     return res.status(201).json({ message: 'success' });
 }
+
+exports.getImages = (req, res, next) => {
+    var files = fs.readdirSync('./resultados');
+
+    return res.status(201).json({ imagens: files });
+}
