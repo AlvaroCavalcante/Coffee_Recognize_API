@@ -1,5 +1,6 @@
 const spawn = require("child_process").spawn;
-
+const fs = require('fs');
+const path = require('path');
 
 exports.uploadAnexo = (req, res, next) => {
     if (!req.file) {
@@ -14,7 +15,7 @@ exports.uploadAnexo = (req, res, next) => {
 
 exports.processImage = (req, res, next) => {
     processRecognition().then(() => {
-        return res.status(201).json({ message: 'sucess' });
+        next();
     }).catch(error => {
         return res.status(500).json({ message: error });
     });
@@ -45,4 +46,20 @@ function processRecognition() {
         };
     });
     return promise;
+}
+
+exports.deleteFiles = (req, res, next) => {
+    const directory = 'uploads';
+    
+    fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+      
+        for (const file of files) {
+          fs.unlink(path.join(directory, file), err => {
+            if (err) throw err;
+          });
+        }
+      });
+
+    return res.status(201).json({ message: 'success' });
 }
