@@ -28,14 +28,14 @@ assert os.path.isfile(PATH_TO_LABELS)
 TEST_IMAGE_PATHS = glob.glob(os.path.join(PATH_TO_TEST_IMAGES_DIR, "*.*"))
 assert len(TEST_IMAGE_PATHS) > 0, 'No image found in `{}`.'.format(PATH_TO_TEST_IMAGES_DIR)
 
-from utils import ops as utils_ops
+sys.path.append("/home/alvaro/Desktop/models/research/object_detection")
+sys.path.append("/home/alvaro/Desktop/models/research")
 
-# This is needed to display the images.
-#%matplotlib inline
+from object_detection.utils import ops as utils_ops
 
-from utils import label_map_util
+from object_detection.utils import label_map_util
 
-from utils import visualization_utils as vis_util
+from object_detection.utils import visualization_utils as vis_util
 
 detection_graph = tf.Graph()
 with detection_graph.as_default():
