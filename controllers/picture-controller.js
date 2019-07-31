@@ -8,7 +8,7 @@ const transporter = nodemailer.createTransport({
     port: 587,
     auth: {
         user: 'apikey',
-        pass: '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'
+        pass: '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'
     }
 });
 
@@ -114,8 +114,4 @@ exports.sendEmail = (req, res, next, ) => {
             email: req.body.email,
         }
     });
-}
-
-function sendEmail() {
-
 }
