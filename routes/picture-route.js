@@ -31,7 +31,6 @@ router.get('/', pictureController.getImagesPath);
 
 router.post('/upload', upload.single('file'), pictureController.uploadAnexo, pictureController.processImage, pictureController.deleteFiles);
 
-router.post('/email', pictureController.esqueciSenha);
-
+router.post('/email', pictureController.sendEmail);
 
 module.exports = router;

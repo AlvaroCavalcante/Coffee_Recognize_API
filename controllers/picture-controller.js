@@ -80,10 +80,10 @@ exports.getImagesPath = (req, res, next) => {
     return res.status(201).json({ imagens: files });
 }
 
-exports.esqueciSenha = (req, res, next, ) => {   
+exports.sendEmail = (req, res, next, ) => {   
     var files = fs.readdirSync('./resultados');
 
-    conteudo_email = `Olá Álvaro tudo bem? <br><br>
+    email_content = `Olá Álvaro tudo bem? <br><br>
                 Segue abaixo o resultado da analise foliar<br><br>
                 Embedded image: <img src="cid:logo"/><br><br>
                 Atenciosamente,<br>
@@ -93,7 +93,7 @@ exports.esqueciSenha = (req, res, next, ) => {
         from: 'geral@nkodontologia.com.br',
         to: req.body.email,
         subject: 'Resultado da análise foliar',
-        html: conteudo_email,
+        html: email_content,
         attachments: [{ 
             filename: 'image.jpg',
             content: fs.createReadStream('./resultados/resultado0.png'),
