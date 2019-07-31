@@ -82,60 +82,50 @@ exports.getImagesPath = (req, res, next) => {
     return res.status(201).json({ imagens: files });
 }
 
-exports.sendEmail = (req, res, next, ) => {   
+exports.sendEmail = (req, res, next, ) => {
     var files = fs.readdirSync('./resultados');
     const directory = 'resultados';
 
-    email_content = `Olá Álvaro tudo bem? <br><br>
+    fs.readdir(directory, (err, files) => {
+
+        email_content = `Olá Álvaro tudo bem? <br><br>
                 Segue abaixo o resultado da analise foliar<br><br>
+                Embedded image: <img src="cid:imagem primeira"/><br><br>
+                Embedded image: <img src="cid:imagem segunda"/><br><br>
                 Atenciosamente,<br>
                 Álvaro Leandro e Lucas Brito `;
 
-    const attach = [];
+        const attach = [];
 
-    //Embedded image: <img src="cid:imagem primeira"/><br><br>
-
-    fs.readdir(directory, (err, files) => {
         if (err) throw err;
         let count = 0;
-        const html = [];
 
         for (const file of files) {
             let content = path.join(directory, file);
-            let name = 'image' + count + 'jpg';
-            html.push("Embedded image: <img src="+ name + "/><br><br>")
+            let name = 'image' + count + '.jpg';
+            email_content += "Embedded image: <img src=" + name + "/><br><br>";
 
             attach.push({
                 filename: name,
-                content: content,
-                cid: 'cid:logo'
+                content: fs.createReadStream('./' + content),
+                cid: name
             })
-            count ++;
-        }
-        console.log(html);
+            count++;
+        }       
 
-    });
+        var mailOptions = {
+            from: 'no-reply<geral@nkodontologia.com.br>',
+            to: req.body.email,
+            subject: 'Resultado da análise foliar',
+            html: email_content,
+            attachments: attach
+        };
 
-    var mailOptions = {
-        from: 'no-reply<geral@nkodontologia.com.br>',
-        to: req.body.email,
-        subject: 'Resultado da análise foliar',
-        html: email_content,
-        attachments: [{ 
-            filename: 'image.jpg',
-            content: fs.createReadStream('./resultados/resultado0.png'),
-            cid: 'cid:imagem primeira'
-        },{
-        filename: 'image2.jpg',
-        content: fs.createReadStream('./resultados/resultado1.png'),
-        cid: 'cid:imagem segunda'
-        }]
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        }
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            }
+        });
     });
 
     return res.status(201).json({
