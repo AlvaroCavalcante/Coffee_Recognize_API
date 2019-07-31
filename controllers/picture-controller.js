@@ -3,12 +3,14 @@ const fs = require('fs');
 const path = require('path');
 var nodemailer = require('nodemailer');
 
+const key = process.env.EMAIL_API_KEY;
+
 const transporter = nodemailer.createTransport({
     host: 'smtp.sendgrid.net',
     port: 587,
     auth: {
         user: 'apikey',
-        pass: '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'
+        pass: key
     }
 });
 
@@ -71,7 +73,7 @@ exports.deleteFiles = (req, res, next) => {
         }
     });
 
-    return res.status(201).json({ message: 'success' });
+    next();
 }
 
 exports.getImagesPath = (req, res, next) => {
@@ -82,22 +84,51 @@ exports.getImagesPath = (req, res, next) => {
 
 exports.sendEmail = (req, res, next, ) => {   
     var files = fs.readdirSync('./resultados');
+    const directory = 'resultados';
 
     email_content = `Olá Álvaro tudo bem? <br><br>
                 Segue abaixo o resultado da analise foliar<br><br>
-                Embedded image: <img src="cid:logo"/><br><br>
                 Atenciosamente,<br>
                 Álvaro Leandro e Lucas Brito `;
 
+    const attach = [];
+
+    //Embedded image: <img src="cid:imagem primeira"/><br><br>
+
+    fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+        let count = 0;
+        const html = [];
+
+        for (const file of files) {
+            let content = path.join(directory, file);
+            let name = 'image' + count + 'jpg';
+            html.push("Embedded image: <img src="+ name + "/><br><br>")
+
+            attach.push({
+                filename: name,
+                content: content,
+                cid: 'cid:logo'
+            })
+            count ++;
+        }
+        console.log(html);
+
+    });
+
     var mailOptions = {
-        from: 'geral@nkodontologia.com.br',
+        from: 'no-reply<geral@nkodontologia.com.br>',
         to: req.body.email,
         subject: 'Resultado da análise foliar',
         html: email_content,
         attachments: [{ 
             filename: 'image.jpg',
             content: fs.createReadStream('./resultados/resultado0.png'),
-            cid: 'cid:logo'
+            cid: 'cid:imagem primeira'
+        },{
+        filename: 'image2.jpg',
+        content: fs.createReadStream('./resultados/resultado1.png'),
+        cid: 'cid:imagem segunda'
         }]
     };
 

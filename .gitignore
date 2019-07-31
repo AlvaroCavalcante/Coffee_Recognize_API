@@ -1,3 +1,4 @@
 uploads/*
 resultados/*
 node_modules
+nodemon.json
