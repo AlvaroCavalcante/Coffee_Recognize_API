@@ -90,8 +90,6 @@ exports.sendEmail = (req, res, next, ) => {
 
         email_content = `Olá Álvaro tudo bem? <br><br>
                 Segue abaixo o resultado da analise foliar<br><br>
-                Embedded image: <img src="cid:imagem primeira"/><br><br>
-                Embedded image: <img src="cid:imagem segunda"/><br><br>
                 Atenciosamente,<br>
                 Álvaro Leandro e Lucas Brito `;
 
@@ -103,11 +101,11 @@ exports.sendEmail = (req, res, next, ) => {
         for (const file of files) {
             let content = path.join(directory, file);
             let name = 'image' + count + '.jpg';
-            email_content += "Embedded image: <img src=" + name + "/><br><br>";
+            email_content += "<img style='display:none' src=" + name + "/><br><br>";
 
             attach.push({
                 filename: name,
-                content: fs.createReadStream('./' + content),
+                path: './' + content,
                 cid: name
             })
             count++;
