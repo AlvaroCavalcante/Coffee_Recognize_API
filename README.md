@@ -1,4 +1,4 @@
-# Coffe_Recognize_API
+# Coffee_Recognize_API
 This is my graduation project api, made with nodeJS and Tensorflow. The objective is to process images to classify and find area of leaf disease in coffee culture.
 
 # Contribute too!
