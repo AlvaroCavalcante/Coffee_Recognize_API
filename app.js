@@ -1,14 +1,21 @@
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 var cors = require('cors')
 
 app.use(cors())
 
 const pictureRoute = require('./routes/picture-route');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({
+  limit: '50mb',
+  parameterLimit: 100000,
+  extended: false 
+}));
+
+app.use(express.json({
+  limit: '50mb'
+}));
+
 
 app.use('/picture', pictureRoute);
 
