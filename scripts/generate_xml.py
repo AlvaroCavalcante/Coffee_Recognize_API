@@ -9,7 +9,6 @@ class GenerateXml(object):
 
     def gerenate_basic_structure(self):
         annotation = ET.Element("annotation")
-        ET.SubElement(annotation, "folder").text = "resultados"
         ET.SubElement(annotation, "filename").text = "name10.jpg"
         ET.SubElement(annotation, "path").text = "/home/alvaro/Documentos/doenças/ferrugem/name10.jpg"
         size = ET.SubElement(annotation, "size")
@@ -31,8 +30,8 @@ class GenerateXml(object):
         arquivo = ET.ElementTree(annotation)
         arquivo.write("meu_xml.xml")
 
-def main():
-    xml = GenerateXml(10, 20, 30, 40)
-    xml.gerenate_basic_structure()    
+# def main():
+#     xml = GenerateXml(10, 20, 30, 40)
+#     xml.gerenate_basic_structure()    
 
-main()
+# main()

@@ -134,6 +134,7 @@ for image_path in TEST_IMAGE_PATHS:
         instance_masks=output_dict.get('detection_masks'),
         use_normalized_coordinates=True,
         line_thickness=10)
+        
     plt.figure(figsize=IMAGE_SIZE)
     plt.imshow(image_np)
     
