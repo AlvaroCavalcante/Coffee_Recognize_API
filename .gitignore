@@ -3,3 +3,4 @@ resultados/*
 node_modules
 nodemon.json
 *.xml
+*.pyc
