@@ -1,11 +1,12 @@
 import xml.etree.cElementTree as ET
+from random import randrange
 
 class GenerateXml(object):
     def __init__(self, left, right, top, bottom):
-        self.left = left
-        self.right = right
-        self.top = top
-        self.bottom = bottom
+        self.xmin = left
+        self.xmax = right
+        self.ymin = top
+        self.ymax = bottom
 
     def gerenate_basic_structure(self):
         annotation = ET.Element("annotation")
@@ -22,13 +23,13 @@ class GenerateXml(object):
         ET.SubElement(objectBox, "truncated").text = "0"
         ET.SubElement(objectBox, "difficult").text = "0"
         bndBox = ET.SubElement(objectBox, "bndbox")
-        ET.SubElement(bndBox, "xmin").text = str(self.left)
-        ET.SubElement(bndBox, "ymax").text = str(self.right) 
-        ET.SubElement(bndBox, "xmin").text = str(self.top)
-        ET.SubElement(bndBox, "ymax").text = str(self.bottom)
+        ET.SubElement(bndBox, "xmin").text = str(self.xmin)
+        ET.SubElement(bndBox, "ymin").text = str(self.ymin) 
+        ET.SubElement(bndBox, "xmax").text = str(self.xmax)
+        ET.SubElement(bndBox, "ymax").text = str(self.ymax)
 
         arquivo = ET.ElementTree(annotation)
-        arquivo.write("meu_xml.xml")
+        arquivo.write("folha" + str(randrange(10)) + ".xml")
 
 # def main():
 #     xml = GenerateXml(10, 20, 30, 40)
