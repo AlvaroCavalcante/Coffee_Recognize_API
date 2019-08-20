@@ -4,7 +4,6 @@ from random import randrange
 class GenerateXml(object):
     def __init__(self, box_array):
         self.box_array = box_array
-        print(self.box_array)
 
     def gerenate_basic_structure(self):
         annotation = ET.Element("annotation")
@@ -22,8 +21,8 @@ class GenerateXml(object):
             ET.SubElement(objectBox, "difficult").text = "0"
             bndBox = ET.SubElement(objectBox, "bndbox")
             ET.SubElement(bndBox, "xmin").text = str(i['xmin'])
-            ET.SubElement(bndBox, "ymin").text = str(i['xmax'])
-            ET.SubElement(bndBox, "xmax").text = str(i['ymin'])
+            ET.SubElement(bndBox, "ymin").text = str(i['ymin'])
+            ET.SubElement(bndBox, "xmax").text = str(i['xmax'])
             ET.SubElement(bndBox, "ymax").text = str(i['ymax'])
 
         arquivo = ET.ElementTree(annotation)
@@ -32,5 +31,3 @@ class GenerateXml(object):
 def main():
     xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}])
     xml.gerenate_basic_structure()    
-
-main()
