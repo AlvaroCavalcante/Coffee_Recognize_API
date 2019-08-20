@@ -21,10 +21,10 @@ class GenerateXml(object):
             ET.SubElement(objectBox, "truncated").text = "0"
             ET.SubElement(objectBox, "difficult").text = "0"
             bndBox = ET.SubElement(objectBox, "bndbox")
-            ET.SubElement(bndBox, "xmin").text = i['xmin']
-            ET.SubElement(bndBox, "ymin").text = i['xmax'] 
-            ET.SubElement(bndBox, "xmax").text = i['ymin']
-            ET.SubElement(bndBox, "ymax").text = i['ymax']
+            ET.SubElement(bndBox, "xmin").text = str(i['xmin'])
+            ET.SubElement(bndBox, "ymin").text = str(i['xmax'])
+            ET.SubElement(bndBox, "xmax").text = str(i['ymin'])
+            ET.SubElement(bndBox, "ymax").text = str(i['ymax'])
 
         arquivo = ET.ElementTree(annotation)
         arquivo.write("folha" + str(randrange(10)) + ".xml")
