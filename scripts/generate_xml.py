@@ -1,16 +1,32 @@
 import xml.etree.cElementTree as ET
 from random import randrange
+import os
 
 class GenerateXml(object):
-    def __init__(self, box_array):
+    def __init__(self, box_array, im_width, im_height):
         self.box_array = box_array
+        self.im_width = im_width
+        self.im_height = im_height
+
+    def get_file_name(self):
+        upload_path = 'Coffe_Recognize_API/xml'
+        directory = os.path.basename(upload_path)
+        file_list = os.listdir(directory)
+        if file_list == []:
+            return 0
+        else:
+            for i in file_list:
+                i = list(i)
+                number = i[(i.index('.') - 1)]
+                return int(number) + 1
 
     def gerenate_basic_structure(self):
+        file_name = "name" + str(self.get_file_name()) + ".xml"
         annotation = ET.Element("annotation")
-        ET.SubElement(annotation, "filename").text = "name10.jpg"
+        ET.SubElement(annotation, "filename").text = file_name
         size = ET.SubElement(annotation, "size")
-        ET.SubElement(size, "width").text = "4000"
-        ET.SubElement(size, "height").text = "2250"
+        ET.SubElement(size, "width").text = str(self.im_width)
+        ET.SubElement(size, "height").text = str(self.im_height)
         ET.SubElement(size, "depth").text = "3"
         
         for i in self.box_array:
@@ -29,5 +45,5 @@ class GenerateXml(object):
         arquivo.write("folha" + str(randrange(10)) + ".xml")
 
 def main():
-    xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}])
+    xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000')
     xml.gerenate_basic_structure()    
