@@ -18,7 +18,7 @@ class GenerateXml(object):
         directory = os.path.basename(upload_path)
         file_list = os.listdir(directory)
         if file_list == []:
-            return 0
+            return 1
         else:
             last_file = file_list[(len(file_list) - 1)]
             number_file = self.get_file_number(last_file)
