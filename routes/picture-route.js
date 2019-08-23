@@ -25,10 +25,7 @@ const upload = multer({
     fileFilter: fileFilter
   });
 
-
-router.get('/', pictureController.getImagesPath);
-
-router.get('/process-and-send-email', pictureController.processImage);
+router.get('/process-and-send-email', pictureController.processImage, pictureController.getImagesPath);
 
 router.post('/upload', upload.single('file'), pictureController.uploadAnexo, pictureController.processImage);
 

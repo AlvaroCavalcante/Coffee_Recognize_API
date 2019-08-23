@@ -16,8 +16,9 @@ app.use(express.json({
   limit: '50mb'
 }));
 
-
 app.use('/picture', pictureRoute);
+
+app.use('/resultados', express.static('resultados/'));
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500);

@@ -45,13 +45,11 @@ function processRecognition() {
     const promise = new Promise((resolve, reject) => {
         try {
             const pythonProcess = spawn('python3', ["scripts/detection_images.py"]);
-            //result.pid = pythonProcess.pid
 
             console.log(`--------------- SERVIÇO INICIADO ---------------------\n`);
 
             pythonProcess.stdout.on('data', (data) => {
                 console.log(`${data}`);
-                // reject();
             });
 
 
@@ -86,7 +84,6 @@ exports.deleteFiles = (req, res, next) => {
 
 exports.getImagesPath = (req, res, next) => {
     var files = fs.readdirSync('./resultados');
-
     return res.status(201).json({ imagens: files });
 }
 
