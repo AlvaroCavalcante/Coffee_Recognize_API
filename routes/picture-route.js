@@ -28,10 +28,10 @@ const upload = multer({
 
 router.get('/', pictureController.getImagesPath);
 
+router.get('/process-and-send-email', pictureController.processImage);
+
 router.post('/upload', upload.single('file'), pictureController.uploadAnexo, pictureController.processImage);
 
 router.post('/upload-gallery', upload.single('file'), pictureController.uploadGallery);
-
-router.post('/process-and-send-email', upload.single('file'), pictureController.processImage);
 
 module.exports = router;
