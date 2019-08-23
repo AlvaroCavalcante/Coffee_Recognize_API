@@ -19,6 +19,10 @@ exports.uploadGallery = (req, res, next) => {
         return res.status(500).send({
             error: 'Arquivo não informado'
         })
+    } else {
+        return res.status(200).send({
+            message: 'file arrived!'
+        })
     }
 };
 
