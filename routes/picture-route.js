@@ -8,8 +8,7 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
-        var ext = file.originalname.substr(file.originalname.lastIndexOf('.') + 1);
-        cb(null, file.fieldname + '-' + new Date().toISOString() + '.' + ext);
+        cb(null, file.fieldname + '-' + new Date().toISOString() + '.' + 'jpg');
     }
 });
 
@@ -29,7 +28,9 @@ const upload = multer({
 
 router.get('/', pictureController.getImagesPath);
 
-router.post('/upload', upload.single('file'), pictureController.uploadAnexo, pictureController.processImage,
-            pictureController.deleteFiles, pictureController.sendEmail);
+router.post('/upload', upload.single('file'), pictureController.uploadAnexo, pictureController.processImage);
+
+router.post('/uploadGallery', upload.single('file'), pictureController.uploadGallery);
+
 
 module.exports = router;

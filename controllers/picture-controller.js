@@ -14,6 +14,14 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+exports.uploadGallery = (req, res, next) => {
+    if (!req.file) {
+        return res.status(500).send({
+            error: 'Arquivo não informado'
+        })
+    }
+};
+
 exports.uploadAnexo = (req, res, next) => {
     if (!req.file) {
         return res.status(500).send({
