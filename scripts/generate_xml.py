@@ -25,9 +25,9 @@ class GenerateXml(object):
             return int(number_file) + 1
 
     def gerenate_basic_structure(self):
-        file_name = "name" + str(self.get_file_name()) + ".xml"
+        file_name = "name" + str(self.get_file_name())
         annotation = ET.Element("annotation")
-        ET.SubElement(annotation, "filename").text = file_name
+        ET.SubElement(annotation, "filename").text = file_name + ".jpg"
         size = ET.SubElement(annotation, "size")
         ET.SubElement(size, "width").text = str(self.im_width)
         ET.SubElement(size, "height").text = str(self.im_height)
@@ -46,10 +46,8 @@ class GenerateXml(object):
             ET.SubElement(bndBox, "ymax").text = str(i['ymax'])
 
         arquivo = ET.ElementTree(annotation)
-        arquivo.write("/home/alvaro/Desktop/Coffe_Recognize_API/xml/" + file_name)
+        arquivo.write("/home/alvaro/Desktop/Coffe_Recognize_API/xml/" + file_name + ".xml")
 
 def main():
     xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000')
     xml.gerenate_basic_structure()    
-
-main()
