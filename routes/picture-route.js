@@ -30,7 +30,8 @@ router.get('/', pictureController.getImagesPath);
 
 router.post('/upload', upload.single('file'), pictureController.uploadAnexo, pictureController.processImage);
 
-router.post('/uploadGallery', upload.single('file'), pictureController.uploadGallery);
+router.post('/upload-gallery', upload.single('file'), pictureController.uploadGallery);
 
+router.post('/process-and-send-email', upload.single('file'), pictureController.processImage);
 
 module.exports = router;
