@@ -10,7 +10,10 @@ class GenerateXml(object):
 
     def get_file_number(self, name_file):
         file = list(name_file)
-        number = file[(file.index('.') - 1)]
+        if len(file) == 9:
+            number = file[(file.index('.') - 1)]
+        else:
+            number = file[(file.index('.') - 2)] + file[(file.index('.') - 1)]
         return number
 
     def get_file_name(self):
@@ -51,3 +54,5 @@ class GenerateXml(object):
 def main():
     xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000')
     xml.gerenate_basic_structure()    
+
+main()

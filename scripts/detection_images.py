@@ -58,7 +58,7 @@ def load_image_into_numpy_array(image):
         (im_height, im_width, 3)).astype(np.uint8)
 
 # Size, in inches, of the output images.
-IMAGE_SIZE = (16, 12)
+IMAGE_SIZE = (6, 8)
 
 
 def run_inference_for_single_image(image, graph):
@@ -134,9 +134,9 @@ for image_path in TEST_IMAGE_PATHS:
         instance_masks=output_dict.get('detection_masks'),
         use_normalized_coordinates=True,
         line_thickness=10)
-        
+
     plt.figure(figsize=IMAGE_SIZE)
     plt.imshow(image_np)
-    
+
     plt.savefig('resultados/resultado' + str(count) +'.png')
     count += 1
