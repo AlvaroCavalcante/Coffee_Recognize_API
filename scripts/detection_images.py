@@ -136,6 +136,7 @@ for image_path in TEST_IMAGE_PATHS:
         line_thickness=10)
 
     plt.figure(figsize=IMAGE_SIZE)
+    plt.axis('off')
     plt.imshow(image_np)
 
     plt.savefig('resultados/resultado' + str(count) +'.png')
