@@ -58,7 +58,7 @@ def load_image_into_numpy_array(image):
         (im_height, im_width, 3)).astype(np.uint8)
 
 # Size, in inches, of the output images.
-IMAGE_SIZE = (6, 8)
+IMAGE_SIZE = (12, 8)
 
 
 def run_inference_for_single_image(image, graph):
