@@ -3,7 +3,8 @@ from random import randrange
 import os
 
 class GenerateXml(object):
-    def __init__(self, box_array, im_width, im_height):
+    def __init__(self, box_array, im_width, im_height, classe):
+        self.classe = classe
         self.box_array = box_array
         self.im_width = im_width
         self.im_height = im_height
@@ -41,7 +42,7 @@ class GenerateXml(object):
         
         for i in self.box_array:
             objectBox = ET.SubElement(annotation, "object")
-            ET.SubElement(objectBox, "name").text = "ferrugem"
+            ET.SubElement(objectBox, "name").text = self.classe
             ET.SubElement(objectBox, "pose").text = "Unspecified"
             ET.SubElement(objectBox, "truncated").text = "0"
             ET.SubElement(objectBox, "difficult").text = "0"
@@ -55,5 +56,5 @@ class GenerateXml(object):
         arquivo.write("/home/alvaro/Desktop/Coffe_Recognize_API/xml/" + file_name + ".xml")
 
 def main():
-    xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000')
+    xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000', 'ferrugem')
     xml.gerenate_basic_structure()    
