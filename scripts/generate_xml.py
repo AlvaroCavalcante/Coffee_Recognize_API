@@ -11,9 +11,12 @@ class GenerateXml(object):
 
     def get_file_number(self, name_file):
         file = list(name_file)
-        if len(file) == 9:
+        len_file = len(file[0: (file.index('.'))])
+        len_classe = len(list(self.classe))
+
+        if len_file == len_classe + 1:
             number = file[(file.index('.') - 1)]
-        elif len(file) == 10:
+        elif len_file == len_classe + 2:
             number = file[(file.index('.') - 2)] + file[(file.index('.') - 1)]
         else:
             number = file[(file.index('.') - 3)] + file[(file.index('.') - 2)] + file[(file.index('.') - 1)]
@@ -32,7 +35,7 @@ class GenerateXml(object):
             return int(number_file) + 1
 
     def gerenate_basic_structure(self):
-        file_name = "name" + str(self.get_file_name())
+        file_name = self.classe + str(self.get_file_name())
         annotation = ET.Element("annotation")
         ET.SubElement(annotation, "filename").text = file_name + ".jpg"
         size = ET.SubElement(annotation, "size")
@@ -56,5 +59,5 @@ class GenerateXml(object):
         arquivo.write("/home/alvaro/Desktop/Coffe_Recognize_API/xml/" + file_name + ".xml")
 
 def main():
-    xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000', 'ferrugem')
+    xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000', 'bicho_mineiro')
     xml.gerenate_basic_structure()    
