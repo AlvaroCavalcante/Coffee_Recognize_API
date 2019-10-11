@@ -133,7 +133,7 @@ for image_path in TEST_IMAGE_PATHS:
         category_index,
         instance_masks=output_dict.get('detection_masks'),
         use_normalized_coordinates=True,
-        line_thickness=10)
+        line_thickness=20)
 
     plt.figure(figsize=IMAGE_SIZE)
     plt.axis('off')
