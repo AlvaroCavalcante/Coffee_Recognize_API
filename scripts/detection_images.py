@@ -133,11 +133,11 @@ for image_path in TEST_IMAGE_PATHS:
         category_index,
         instance_masks=output_dict.get('detection_masks'),
         use_normalized_coordinates=True,
-        line_thickness=20)
+        line_thickness=10)
 
     plt.figure(figsize=IMAGE_SIZE)
     plt.axis('off')
     plt.imshow(image_np)
 
-    plt.savefig('resultados/resultado' + str(count) +'.png')
+    plt.savefig('resultados/resultado' + str(count) +'.png', bbox_inches='tight')
     count += 1
