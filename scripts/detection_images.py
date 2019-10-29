@@ -48,7 +48,7 @@ with detection_graph.as_default():
 
 label_map = label_map_util.load_labelmap(PATH_TO_LABELS)
 categories = label_map_util.convert_label_map_to_categories(
-    label_map, max_num_classes= 1, use_display_name=True)
+    label_map, max_num_classes= 2, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
 
