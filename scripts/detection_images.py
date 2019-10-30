@@ -68,7 +68,7 @@ def get_file_number(name_file):
         return number
 
 def get_file_name():
-    result_path = '/home/alvaro/Desktop/Coffe_Recognize_API/resultados'
+    result_path = '/home/alvaro/Desktop/Coffe_Recognize_API/results'
     directory = os.path.basename(result_path)
     file_list = os.listdir(directory)
     if file_list == []:
@@ -131,7 +131,6 @@ def run_inference_for_single_image(image, graph):
                 output_dict['detection_masks'] = output_dict['detection_masks'][0]
     return output_dict
 
-count = 0
 for image_path in TEST_IMAGE_PATHS:
     image = Image.open(image_path)
     # the array based representation of the image will be used later in order to prepare the
@@ -157,5 +156,4 @@ for image_path in TEST_IMAGE_PATHS:
     plt.axis('off')
     plt.imshow(image_np)
 
-    plt.savefig('resultados/image_' + str(get_file_name()) +'.jpg', bbox_inches='tight')
-    count += 1
+    plt.savefig('results/image_' + str(get_file_name()) +'.jpg', bbox_inches='tight')
