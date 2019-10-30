@@ -28,7 +28,7 @@ class GenerateXml(object):
             return int(number_file) + 1
 
     def gerenate_basic_structure(self):
-        file_name = image + "_" + str(self.get_file_name())
+        file_name = "image" + "_" + str(self.get_file_name())
         annotation = ET.Element("annotation")
         ET.SubElement(annotation, "filename").text = file_name + ".jpg"
         size = ET.SubElement(annotation, "size")
