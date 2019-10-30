@@ -58,7 +58,7 @@ def load_image_into_numpy_array(image):
         (im_height, im_width, 3)).astype(np.uint8)
 
 # Size, in inches, of the output images.
-IMAGE_SIZE = (12, 8)
+IMAGE_SIZE = (52, 31)
 
 def get_file_number(name_file):
         file = list(name_file)

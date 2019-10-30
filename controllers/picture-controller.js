@@ -87,13 +87,13 @@ exports.deleteFiles = (req, res, next) => {
 }
 
 exports.getImagesPath = (req, res, next) => {
-    var files = fs.readdirSync('./resultados');
+    var files = fs.readdirSync('./results');
     return res.status(201).json({ imagens: files });
 }
 
 exports.sendEmail = (req, res, next, ) => {
-    var files = fs.readdirSync('./resultados');
-    const directory = 'resultados';
+    var files = fs.readdirSync('./results');
+    const directory = 'results';
 
     fs.readdir(directory, (err, files) => {
 
