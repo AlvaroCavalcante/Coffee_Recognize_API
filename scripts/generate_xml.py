@@ -17,8 +17,8 @@ class GenerateXml(object):
         return number
 
     def get_file_name(self):
-        upload_path = '/home/alvaro/Desktop/Coffe_Recognize_API/xml'
-        directory = os.path.basename(upload_path)
+        xml_path = '/home/alvaro/Desktop/Coffe_Recognize_API/xml'
+        directory = os.path.basename(xml_path)
         file_list = os.listdir(directory)
         if file_list == []:
             return 1
