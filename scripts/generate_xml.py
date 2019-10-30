@@ -11,15 +11,8 @@ class GenerateXml(object):
 
     def get_file_number(self, name_file):
         file = list(name_file)
-        len_file = len(file[0: (file.index('.'))])
-        len_classe = len(list(self.classe))
-
-        if len_file == len_classe + 1:
-            number = file[(file.index('.') - 1)]
-        elif len_file == len_classe + 2:
-            number = file[(file.index('.') - 2)] + file[(file.index('.') - 1)]
-        else:
-            number = file[(file.index('.') - 3)] + file[(file.index('.') - 2)] + file[(file.index('.') - 1)]
+        dot_index = file.index('.')
+        number = file[dot_index - 1]
 
         return number
 
@@ -35,7 +28,7 @@ class GenerateXml(object):
             return int(number_file) + 1
 
     def gerenate_basic_structure(self):
-        file_name = self.classe + str(self.get_file_name())
+        file_name = self.classe + "_" + str(self.get_file_name())
         annotation = ET.Element("annotation")
         ET.SubElement(annotation, "filename").text = file_name + ".jpg"
         size = ET.SubElement(annotation, "size")
