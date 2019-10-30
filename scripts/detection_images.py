@@ -60,6 +60,23 @@ def load_image_into_numpy_array(image):
 # Size, in inches, of the output images.
 IMAGE_SIZE = (12, 8)
 
+def get_file_number(name_file):
+        file = list(name_file)
+        dot_index = file.index('.')
+        number = file[dot_index - 1]
+
+        return number
+
+def get_file_name():
+    result_path = '/home/alvaro/Desktop/Coffe_Recognize_API/resultados'
+    directory = os.path.basename(result_path)
+    file_list = os.listdir(directory)
+    if file_list == []:
+        return 1
+    else:
+        last_file = file_list[(len(file_list) - 1)]
+        number_file = get_file_number(last_file)
+        return int(number_file) + 1
 
 def run_inference_for_single_image(image, graph):
     with graph.as_default():
@@ -124,6 +141,7 @@ for image_path in TEST_IMAGE_PATHS:
     image_np_expanded = np.expand_dims(image_np, axis=0)
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np, detection_graph)
+
     # Visualization of the results of a detection.
     vis_util.visualize_boxes_and_labels_on_image_array(
         image_np,
@@ -139,5 +157,5 @@ for image_path in TEST_IMAGE_PATHS:
     plt.axis('off')
     plt.imshow(image_np)
 
-    plt.savefig('resultados/resultado' + str(count) +'.png', bbox_inches='tight')
+    plt.savefig('resultados/image_' + str(get_file_name()) +'.jpg', bbox_inches='tight')
     count += 1
