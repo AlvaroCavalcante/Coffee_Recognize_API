@@ -1,5 +1,5 @@
 uploads/*
-resultados/*
+results/*
 node_modules
 nodemon.json
 *.xml
