@@ -57,9 +57,6 @@ def load_image_into_numpy_array(image):
     return np.array(image.getdata()).reshape(
         (im_height, im_width, 3)).astype(np.uint8)
 
-# Size, in inches, of the output images.
-IMAGE_SIZE = (52, 31)
-
 def get_file_number(name_file):
         file = list(name_file)
         dot_index = file.index('.')
@@ -76,7 +73,7 @@ def get_file_name():
     else:
         last_file = file_list[(len(file_list) - 1)]
         number_file = get_file_number(last_file)
-        return int(number_file) + 1
+        return int(number_file) + 1   
 
 def run_inference_for_single_image(image, graph):
     with graph.as_default():
@@ -133,10 +130,18 @@ def run_inference_for_single_image(image, graph):
 
 for image_path in TEST_IMAGE_PATHS:
     image = Image.open(image_path)
+    
+    im_width, im_height = image.size # tamanho da imagem
+
+    im_width_inche = im_width // 77
+    im_height_inche = im_height // 77
+
+    IMAGE_SIZE = (im_width_inche, im_height_inche)
+
     # the array based representation of the image will be used later in order to prepare the
     # result image with boxes and labels on it.
     image_np = load_image_into_numpy_array(image)
-    # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
+    # Expand dimensions since the model expects images to have e:[1 shap, None, None, 3]
     image_np_expanded = np.expand_dims(image_np, axis=0)
     # Actual detection.
     output_dict = run_inference_for_single_image(image_np, detection_graph)
