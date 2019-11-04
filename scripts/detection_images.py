@@ -51,7 +51,6 @@ categories = label_map_util.convert_label_map_to_categories(
     label_map, max_num_classes= 2, use_display_name=True)
 category_index = label_map_util.create_category_index(categories)
 
-
 def load_image_into_numpy_array(image):
     (im_width, im_height) = image.size
     return np.array(image.getdata()).reshape(
@@ -64,12 +63,26 @@ def get_file_number(name_file):
 
         return number
 
+def get_database_number():
+    database_path = '/home/alvaro/Desktop/Coffe_Recognize_API/database'
+    directory_database = os.path.basename(database_path)
+    file_list_database = os.listdir(directory_database)
+
+    if file_list_database == []:
+        return 1
+    else:
+        last_file = file_list_database[(len(file_list_database) - 1)]
+        number_file = get_file_number(last_file)
+        return int(number_file) + 1   
+
 def get_file_name():
     result_path = '/home/alvaro/Desktop/Coffe_Recognize_API/results'
     directory = os.path.basename(result_path)
     file_list = os.listdir(directory)
+
     if file_list == []:
-        return 1
+        number_file = get_database_number()
+        return number_file
     else:
         last_file = file_list[(len(file_list) - 1)]
         number_file = get_file_number(last_file)
@@ -131,7 +144,7 @@ def run_inference_for_single_image(image, graph):
 for image_path in TEST_IMAGE_PATHS:
     image = Image.open(image_path)
     
-    im_width, im_height = image.size # tamanho da imagem
+    im_width, im_height = image.size
 
     im_width_inche = im_width // 77
     im_height_inche = im_height // 77
