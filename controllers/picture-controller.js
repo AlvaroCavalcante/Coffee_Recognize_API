@@ -5,6 +5,8 @@ var nodemailer = require('nodemailer');
 
 const key = process.env.EMAIL_API_KEY;
 
+var files;
+
 const transporter = nodemailer.createTransport({
     host: 'smtp.sendgrid.net',
     port: 587,
@@ -87,8 +89,21 @@ exports.deleteFiles = (req, res, next) => {
 }
 
 exports.getImagesPath = (req, res, next) => {
-    var files = fs.readdirSync('./results');
-    return res.status(201).json({ imagens: files });
+    files = fs.readdirSync('./results');
+    next();
+}
+
+exports.moveToDatabase = (req, res, next) => {
+    var newPath = '/home/alvaro/Desktop/Coffe_Recognize_API/database'
+    var oldPath = '/home/alvaro/Desktop/Coffe_Recognize_API/results'
+
+    // fs.rename(oldPath, newPath, function (err) {
+    // if (err) throw err
+    //     if (!fs.existsSync(newPath)){
+    //         fs.mkdirSync(newPath);
+    //     }
+    //     return res.status(201).json({ imagens: files });
+    // })
 }
 
 exports.sendEmail = (req, res, next, ) => {
