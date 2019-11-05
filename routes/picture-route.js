@@ -32,6 +32,6 @@ router.post('/upload-gallery', upload.single('file'), pictureController.uploadGa
 
 router.post('/upload', upload.single('file'), pictureController.uploadAnexo, pictureController.processImage, pictureController.deleteFiles, pictureController.getImagesPath);
 
-router.post('quantify', upload.single('file'), pictureController.quantify);
+router.post('/quantify', pictureController.quantify);
 
 module.exports = router;

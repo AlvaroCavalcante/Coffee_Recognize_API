@@ -104,7 +104,7 @@ exports.quantify = (req, res, next) => {
 function processQuantify() {
     const promise = new Promise((resolve, reject) => {
         try {
-            const pythonProcess = spawn('python3', ["scripts/detection_images.py"]);
+            const pythonProcess = spawn('python3', ["scripts/kmeans.py"]);
 
             console.log(`--------------- SERVIÇO INICIADO ---------------------\n`);
 
