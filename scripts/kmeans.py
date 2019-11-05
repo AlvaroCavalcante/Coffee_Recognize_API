@@ -21,5 +21,6 @@ contaminacao = (porcentagens[-1]*100)/reduce(operator.add, porcentagens)
 
 folha_doenca = round(reduce(operator.add, porcentagens), 2)
 contaminacao = round(contaminacao, 2)
-
+print(folha_doenca, contaminacao)
+sys.stdout.flush()
 #return img, bar, folha_doenca, contaminacao

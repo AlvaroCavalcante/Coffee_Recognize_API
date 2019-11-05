@@ -88,6 +88,22 @@ exports.deleteFiles = (req, res, next) => {
     next();
 }
 
+exports.deleteQuantifyFile = (req, res, next) => {
+    const directory = 'img_hsv';
+
+    fs.readdir(directory, (err, files) => {
+        if (err) throw err;
+
+        for (const file of files) {
+            fs.unlink(path.join(directory, file), err => {
+                if (err) throw err;
+            });
+        }
+    });
+    
+    return res.status(201).json({ message: 'sucess'})
+}
+
 exports.getImagesPath = (req, res, next) => {
     files = fs.readdirSync('./results');
     next();
