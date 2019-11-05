@@ -111,7 +111,6 @@ exports.moveToDatabase = (req, res, next) => {
 }
 
 exports.sendEmail = (req, res, next, ) => {
-    var files = fs.readdirSync('./results');
     const directory = 'results';
 
     fs.readdir(directory, (err, files) => {
@@ -123,25 +122,22 @@ exports.sendEmail = (req, res, next, ) => {
 
         const attach = [];
 
-        if (err) throw err;
-        let count = 0;
-
         for (const file of files) {
             let content = path.join(directory, file);
-            let name = 'image' + count + '.jpg';
-            email_content += "<img style='display:none' src=" + name + "/><br><br>";
+
+            email_content += "<img style='display:none' src=" + file + "/><br><br>";
 
             attach.push({
-                filename: name,
+                filename: file,
                 path: './' + content,
-                cid: name
+                cid: file
             })
-            count++;
         }
 
         var mailOptions = {
             from: 'no-reply<geral@nkodontologia.com.br>',
-            to: req.body.email,
+            // to: req.body.email,
+            to: 'leandro0807@live.com',
             subject: 'Resultado da análise foliar',
             html: email_content,
             attachments: attach
@@ -158,7 +154,7 @@ exports.sendEmail = (req, res, next, ) => {
         error: null,
         response: {
             message: 'Relatório enviado',
-            email: req.body.email,
+            // email: req.body.email,
         }
     });
 }
