@@ -14,6 +14,9 @@ class GenerateXml(object):
         dot_index = file.index('.')
         number = file[dot_index - 1]
 
+        if number == '0':
+            number = file[dot_index - 2] + file[dot_index - 1]
+
         return number
 
     def get_file_name(self):
@@ -54,3 +57,5 @@ class GenerateXml(object):
 def main():
     xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000', 'bicho_mineiro')
     xml.gerenate_basic_structure()    
+
+main()

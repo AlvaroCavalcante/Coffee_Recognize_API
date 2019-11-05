@@ -61,8 +61,8 @@ def get_file_number(name_file):
         dot_index = file.index('.')
         number = file[dot_index - 1]
 
-        if number == 0:
-            number = file[dot_index - 1] + file[dot_index - 1]
+        if number == '0':
+            number = file[dot_index - 2] + file[dot_index - 1]
 
         return number
 
