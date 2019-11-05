@@ -93,6 +93,39 @@ exports.getImagesPath = (req, res, next) => {
     next();
 }
 
+exports.quantify = (req, res, next) => {
+    processQuantify().then(() => {
+        next();
+    }).catch(error => {
+        return res.status(500).json({ message: error });
+    });
+}
+
+function processQuantify() {
+    const promise = new Promise((resolve, reject) => {
+        try {
+            const pythonProcess = spawn('python3', ["scripts/detection_images.py"]);
+
+            console.log(`--------------- SERVIÇO INICIADO ---------------------\n`);
+
+            pythonProcess.stdout.on('data', (data) => {
+                console.log(`${data}`);
+            });
+
+
+            pythonProcess.on('close', (code) => {
+                console.log(`--------------- SERVIÇO CONCLUÍDO ---------------------\nCÓDIGO: ${code}`);
+                resolve();
+            });
+
+        } catch (error) {
+            console.log(`-------------- ERRO -----------------\n${error}`);
+            reject();
+        };
+    });
+    return promise;
+}
+
 exports.moveToDatabase = (req, res, next) => {
     var newPath = '/home/alvaro/Desktop/Coffe_Recognize_API/database'
     var oldPath = '/home/alvaro/Desktop/Coffe_Recognize_API/results'
