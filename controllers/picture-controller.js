@@ -28,7 +28,7 @@ exports.uploadGallery = (req, res, next) => {
     }
 };
 
-exports.uploadAnexo = (req, res, next) => {
+exports.upload = (req, res, next) => {
     if (!req.file) {
         return res.status(500).send({
             error: 'Arquivo não informado'

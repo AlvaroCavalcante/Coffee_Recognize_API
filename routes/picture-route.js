@@ -30,8 +30,8 @@ router.post('/process-and-send-email', pictureController.processImage, pictureCo
 
 router.post('/upload-gallery', upload.single('file'), pictureController.uploadGallery);
 
-router.post('/upload', upload.single('file'), pictureController.uploadAnexo, pictureController.processImage, pictureController.deleteFiles, pictureController.getImagesPath);
+router.post('/upload', upload.single('file'), pictureController.upload, pictureController.processImage, pictureController.deleteFiles, pictureController.getImagesPath);
 
-router.post('/quantify', upload.single('file'), pictureController.quantify, pictureController.deleteQuantifyFile);
+router.post('/quantify', upload.single('file'), pictureController.quantify, pictureController.deleteFiles, pictureController.deleteQuantifyFile);
 
 module.exports = router;
