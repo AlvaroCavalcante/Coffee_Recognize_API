@@ -97,13 +97,17 @@ exports.moveToDatabase = (req, res, next) => {
     var newPath = '/home/alvaro/Desktop/Coffe_Recognize_API/database'
     var oldPath = '/home/alvaro/Desktop/Coffe_Recognize_API/results'
 
-    // fs.rename(oldPath, newPath, function (err) {
-    // if (err) throw err
-    //     if (!fs.existsSync(newPath)){
-    //         fs.mkdirSync(newPath);
-    //     }
-    //     return res.status(201).json({ imagens: files });
-    // })
+    fileList = fs.readdirSync(oldPath)
+
+    fileList.forEach(file => {
+        filePath = oldPath + '/' + file
+        newFile = newPath + '/' + file
+        fs.rename(filePath, newFile, function (err) {
+            if (err) throw err
+        })
+    });
+
+    return res.status(201).json({ imagens: files });
 }
 
 exports.sendEmail = (req, res, next, ) => {
@@ -133,7 +137,7 @@ exports.sendEmail = (req, res, next, ) => {
                 cid: name
             })
             count++;
-        }       
+        }
 
         var mailOptions = {
             from: 'no-reply<geral@nkodontologia.com.br>',
