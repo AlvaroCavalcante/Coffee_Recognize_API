@@ -19,5 +19,5 @@ contaminacao = (porcentagens[-1]*100)/reduce(operator.add, porcentagens)
 folha_doenca = round(reduce(operator.add, porcentagens), 2)
 contaminacao = round(contaminacao, 2)
 
-sys.stdout.flush(folha_doenca)
+print('leaf disease', folha_doenca, 'contamination', contaminacao)
 #return img, bar, folha_doenca, contaminacao

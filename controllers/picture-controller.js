@@ -109,15 +109,15 @@ exports.getImagesPath = (req, res, next) => {
     next();
 }
 
-exports.quantify = (req, res, next) => {
-    processQuantify().then(() => {
-        next();
-    }).catch(error => {
-        return res.status(500).json({ message: error });
-    });
-}
+// exports.quantify = (req, res, next) => {
+//     processQuantify().then(() => {
+//         next();
+//     }).catch(error => {
+//         return res.status(500).json({ message: error });
+//     });
+// }
 
-function processQuantify() {
+exports.quantify = (req, res, next) => {
     const promise = new Promise((resolve, reject) => {
         try {
             const pythonProcess = spawn('python3', ["scripts/kmeans.py"]);
@@ -125,9 +125,9 @@ function processQuantify() {
             console.log(`--------------- SERVIÇO INICIADO ---------------------\n`);
 
             pythonProcess.stdout.on('data', (data) => {
-                console.log(`${data}`);
+                var dados = `${data}`
+                return res.status(200).json({ message:  dados})
             });
-
 
             pythonProcess.on('close', (code) => {
                 console.log(`--------------- SERVIÇO CONCLUÍDO ---------------------\nCÓDIGO: ${code}`);
