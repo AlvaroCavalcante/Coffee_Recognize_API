@@ -9,7 +9,7 @@ import os
 
 ut.convert_file()
 
-img = cv2.imread('/home/alvaro/Desktop/Coffe_Recognize_API/img_hsv/fitossanidade.png')
+img = cv2.imread('/home/alvaro/Área de Trabalho/Coffe_Recognize_API/img_hsv/fitossanidade.png')
 rect = (188, 224, 382, 687)
 clusters = 5
 

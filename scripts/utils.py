@@ -45,14 +45,14 @@ def plot_colors(hist, centroids):
 
 
 def convert_file():
-    upload_path = '/home/alvaro/Desktop/Coffe_Recognize_API/uploads'
+    upload_path = '/home/alvaro/Área de Trabalho/Coffe_Recognize_API/uploads'
     directory = os.path.basename(upload_path)
     img = os.listdir(directory)
 
     img = cv2.imread(upload_path + '/' + img[0])
     # img = resize(img, 32)
     img = toHSV(img)
-    cv2.imwrite('/home/alvaro/Desktop/Coffe_Recognize_API/img_hsv/fitossanidade.png', img)
+    cv2.imwrite('/home/alvaro/Área de Trabalho/Coffe_Recognize_API/img_hsv/fitossanidade.png', img)
 
 
 def toKmeans(img, clusters):
