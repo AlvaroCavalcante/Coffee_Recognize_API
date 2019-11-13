@@ -9,15 +9,18 @@ import os
 
 ut.convert_file()
 
-img = cv2.imread('/home/alvaro/Coffe_Recognize_API/img_hsv/fitossanidade.png')
+img = cv2.imread('/home/alvaro/Coffee_Recognize_API/img_hsv/fitossanidade.png')
 rect = (188, 224, 382, 687)
 clusters = 5
 
+results = []
+
 bar, porcentagens = ut.toKmeans(ut.black_back(img, rect), clusters)
-contaminacao = (porcentagens[-1]*100)/reduce(operator.add, porcentagens)
+contamination = (porcentagens[-1]*100)/reduce(operator.add, porcentagens)
 
-folha_doenca = round(reduce(operator.add, porcentagens), 2)
-contaminacao = round(contaminacao, 2)
+leaf_disease = round(reduce(operator.add, porcentagens), 2)
+contamination = round(contamination, 2)
 
-print('leaf disease', folha_doenca, 'contamination', contaminacao)
-#return img, bar, folha_doenca, contaminacao
+results.append(leaf_disease)
+results.append(contamination)
+print(results)

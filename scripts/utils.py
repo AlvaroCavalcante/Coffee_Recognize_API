@@ -51,7 +51,6 @@ def convert_file():
     img = os.listdir(directory)
 
     img = cv2.imread(upload_path + '/' + img[0])
-    print(img)
     img = toHSV(img)
     cv2.imwrite('/home/alvaro/Coffee_Recognize_API/img_hsv/fitossanidade.png', img)
 
