@@ -28,8 +28,8 @@ assert os.path.isfile(PATH_TO_LABELS)
 TEST_IMAGE_PATHS = glob.glob(os.path.join(PATH_TO_TEST_IMAGES_DIR, "*.*"))
 assert len(TEST_IMAGE_PATHS) > 0, 'No image found in `{}`.'.format(PATH_TO_TEST_IMAGES_DIR)
 
-sys.path.append("home/alvaro/Área de Trabalho/models/research/object_detection")
-sys.path.append("home/alvaro/Área de Trabalho/models/research")
+sys.path.append("home/alvaro/models/research/object_detection")
+sys.path.append("home/alvaro/models/research")
 
 from object_detection.utils import ops as utils_ops
 
@@ -67,7 +67,7 @@ def get_file_number(name_file):
         return number
 
 def get_database_number():
-    database_path = 'home/alvaro/Área de Trabalho/Coffe_Recognize_API/database'
+    database_path = 'home/alvaro/Coffe_Recognize_API/database'
     directory_database = os.path.basename(database_path)
     file_list_database = os.listdir(directory_database)
 
@@ -79,7 +79,7 @@ def get_database_number():
         return int(number_file) + 1   
 
 def get_file_name():
-    result_path = 'home/alvaro/Área de Trabalho/Coffe_Recognize_API/results'
+    result_path = 'home/alvaro/Coffe_Recognize_API/results'
     directory = os.path.basename(result_path)
     file_list = os.listdir(directory)
 

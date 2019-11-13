@@ -6,6 +6,7 @@ import operator
 import collections
 import os
 from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
 
 def resize(img, scale_percent=50):
     width = int(img.shape[1] * (scale_percent / 100))
@@ -45,15 +46,14 @@ def plot_colors(hist, centroids):
 
 
 def convert_file():
-    upload_path = '/home/alvaro/Área de Trabalho/Coffe_Recognize_API/uploads'
+    upload_path = '/home/alvaro/Coffee_Recognize_API/uploads'
     directory = os.path.basename(upload_path)
     img = os.listdir(directory)
 
     img = cv2.imread(upload_path + '/' + img[0])
-    # img = resize(img, 32)
+    print(img)
     img = toHSV(img)
-    cv2.imwrite('/home/alvaro/Área de Trabalho/Coffe_Recognize_API/img_hsv/fitossanidade.png', img)
-
+    cv2.imwrite('/home/alvaro/Coffee_Recognize_API/img_hsv/fitossanidade.png', img)
 
 def toKmeans(img, clusters):
     img = img.reshape((img.shape[0] * img.shape[1], 3))
