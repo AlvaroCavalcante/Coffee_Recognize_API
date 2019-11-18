@@ -143,8 +143,8 @@ exports.quantify = (req, res, next) => {
 }
 
 exports.moveToDatabase = (req, res, next) => {
-    var newPath = '/home/alvaro/Desktop/Coffee_Recognize_API/database'
-    var oldPath = '/home/alvaro/Desktop/Coffee_Recognize_API/results'
+    var newPath = '/home/alvaro/Coffee_Recognize_API/database'
+    var oldPath = '/home/alvaro/Coffee_Recognize_API/results'
 
     fileList = fs.readdirSync(oldPath)
 
@@ -206,6 +206,5 @@ exports.sendEmail = (req, res, next, ) => {
     //         // email: req.body.email,
     //     }
     // });
-    console.log('someday');
-    
+    next();    
 }
