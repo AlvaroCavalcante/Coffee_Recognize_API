@@ -844,9 +844,19 @@ def visualize_boxes_and_labels_on_image_array(
                     box_to_color_map[box] = STANDARD_COLORS[
                         classes[i] % len(STANDARD_COLORS)]
 
+    array_position = []
     # Draw all boxes onto image.
     for box, color in box_to_color_map.items():
         ymin, xmin, ymax, xmax = box
+        dict_position = {'xmin': 0, 'xmax': 0, 'ymin': 0, 'ymax': 0}
+
+        dict_position['ymin'] = ymin
+        dict_position['xmin'] = xmin
+        dict_position['ymax'] = ymax
+        dict_position['ymax'] = xmax
+
+        array_position.append(dict_position)
+
         if instance_masks is not None:
             draw_mask_on_image_array(
                 image,
@@ -877,6 +887,11 @@ def visualize_boxes_and_labels_on_image_array(
                 color=color,
                 radius=line_thickness / 2,
                 use_normalized_coordinates=use_normalized_coordinates)
+
+    height, width, shape = image.shape
+
+    xml = generate_xml.GenerateXml(array_position, width, height, class_name)
+    xml.gerenate_basic_structure()
 
     return image
 
