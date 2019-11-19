@@ -9,26 +9,15 @@ class GenerateXml(object):
         self.im_width = im_width
         self.im_height = im_height
 
-    def get_file_number(self, name_file):
-        file = list(name_file)
-        dot_index = file.index('.')
-        number = file[dot_index - 1]
-
-        if number == '0':
-            number = file[dot_index - 2] + file[dot_index - 1]
-
-        return number
-
     def get_file_name(self):
-        xml_path = '/home/alvaro/Coffee_Recognize_API/xml'
+        xml_path = '/home/alvaro/Desktop/Coffee_Recognize_API/xml'
         directory = os.path.basename(xml_path)
         file_list = os.listdir(directory)
-        if file_list == []:
+
+        if len(file_list) == 0:
             return 1
         else:
-            last_file = file_list[(len(file_list) - 1)]
-            number_file = self.get_file_number(last_file)
-            return int(number_file) + 1
+            return len(file_list) + 1
 
     def gerenate_basic_structure(self):
         file_name = "image" + "_" + str(self.get_file_name())
@@ -52,7 +41,7 @@ class GenerateXml(object):
             ET.SubElement(bndBox, "ymax").text = str(i['ymax'])
 
         arquivo = ET.ElementTree(annotation)
-        arquivo.write("/home/alvaro/Coffee_Recognize_API/xml/" + file_name + ".xml")
+        arquivo.write("/home/alvaro/Desktop/Coffee_Recognize_API/xml/" + file_name + ".xml")
 
 def main():
     xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000', 'bicho_mineiro')
