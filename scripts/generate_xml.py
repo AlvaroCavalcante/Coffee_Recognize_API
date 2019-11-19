@@ -20,7 +20,7 @@ class GenerateXml(object):
         return number
 
     def get_file_name(self):
-        xml_path = '/home/alvaro/Desktop/Coffee_Recognize_API/xml'
+        xml_path = '/home/alvaro/Coffee_Recognize_API/xml'
         directory = os.path.basename(xml_path)
         file_list = os.listdir(directory)
         if file_list == []:
@@ -52,7 +52,7 @@ class GenerateXml(object):
             ET.SubElement(bndBox, "ymax").text = str(i['ymax'])
 
         arquivo = ET.ElementTree(annotation)
-        arquivo.write("/home/alvaro/Desktop/Coffee_Recognize_API/xml/" + file_name + ".xml")
+        arquivo.write("/home/alvaro/Coffee_Recognize_API/xml/" + file_name + ".xml")
 
 def main():
     xml = GenerateXml([{'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}, {'xmin': 0.5406094193458557, 'xmax': 0.6001364588737488, 'ymin': 0.6876631379127502, 'ymax': 0.7547240853309631}], '4000', '2000', 'bicho_mineiro')
