@@ -32,10 +32,6 @@ TEST_IMAGE_PATHS = glob.glob(os.path.join(PATH_TO_TEST_IMAGES_DIR, "*.*"))
 assert len(TEST_IMAGE_PATHS) > 0, 'No image found in `{}`.'.format(
     PATH_TO_TEST_IMAGES_DIR)
 
-sys.path.append("home/alvaro/models/research/object_detection")
-sys.path.append("home/alvaro/models/research")
-
-
 try:
 
     detection_graph = tf.Graph()
