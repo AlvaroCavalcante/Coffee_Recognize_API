@@ -67,19 +67,17 @@ try:
         directory_database = os.path.basename(database_path)
         file_list_database = os.listdir(directory_database)
 
-        if file_list_database == []:
+        if len(file_list_database) == 0:
             return 1
         else:
-            last_file = file_list_database[(len(file_list_database) - 1)]
-            number_file = get_file_number(last_file)
-            return int(number_file) + 1
+            return len(file_list_database) + 1
 
     def get_file_name():
         result_path = 'home/alvaro/Coffee_Recognize_API/results'
         directory = os.path.basename(result_path)
         file_list = os.listdir(directory)
 
-        if file_list == []:
+        if len(file_list) == 0:
             number_file = get_database_number()
             return number_file
         else:
