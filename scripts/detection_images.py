@@ -63,9 +63,7 @@ try:
         return number
 
     def get_database_number():
-        database_path = 'home/alvaro/Coffee_Recognize_API/database'
-        directory_database = os.path.basename(database_path)
-        file_list_database = os.listdir(directory_database)
+        file_list_database = get_files_on_directory('home/alvaro/Coffee_Recognize_API/database')
 
         if len(file_list_database) == 0:
             return 1
@@ -73,9 +71,7 @@ try:
             return len(file_list_database) + 1
 
     def get_file_name():
-        result_path = 'home/alvaro/Coffee_Recognize_API/results'
-        directory = os.path.basename(result_path)
-        file_list = os.listdir(directory)
+        file_list = get_files_on_directory('home/alvaro/Coffee_Recognize_API/results')
 
         if len(file_list) == 0:
             number_file = get_database_number()
@@ -84,6 +80,21 @@ try:
             last_file = file_list[(len(file_list) - 1)]
             number_file = get_file_number(last_file)
             return int(number_file) + 1
+
+    def get_files_on_directory(path):
+        directory = os.path.basename(path)
+        file_list = os.listdir(directory)
+        return file_list
+
+    def verify_image_is_valid_for_database():
+        results_file_list = get_files_on_directory('home/alvaro/Coffee_Recognize_API/results')
+
+        xml_file_list = get_files_on_directory('home/alvaro/Coffee_Recognize_API/xml')
+        
+        if len(xml_file_list) == len(results_file_list):
+            return False
+        else:
+            return True
 
     def run_inference_for_single_image(image, graph):
         with graph.as_default():
@@ -171,8 +182,11 @@ try:
         plt.axis('off')
         plt.imshow(image_np)
 
-        plt.savefig('results/image_' + str(get_file_name()) +
-                    '.jpg', bbox_inches='tight')
+        is_valid = verify_image_is_valid_for_database()
+
+        if is_valid == True:
+            plt.savefig('results/image_' + str(get_file_name()) +
+                        '.jpg', bbox_inches='tight')
 
 except Exception as error:
     print(error)
