@@ -75,15 +75,15 @@ function processRecognition() {
 exports.deleteFiles = (req, res, next) => {
     const directory = 'uploads';
 
-    // fs.readdir(directory, (err, files) => {
-    //     if (err) throw err;
+    fs.readdir(directory, (err, files) => {
+        if (err) throw err;
 
-    //     for (const file of files) {
-    //         fs.unlink(path.join(directory, file), err => {
-    //             if (err) throw err;
-    //         });
-    //     }
-    // });
+        for (const file of files) {
+            fs.unlink(path.join(directory, file), err => {
+                if (err) throw err;
+            });
+        }
+    });
 
     next();
 }
@@ -106,7 +106,7 @@ exports.deleteQuantifyFile = (req, res, next) => {
 
 exports.getImagesPath = (req, res, next) => {
     files = fs.readdirSync('./results');
-    next();
+    return res.status(201).json({ imagens: files });
 }
 
 // exports.quantify = (req, res, next) => {
