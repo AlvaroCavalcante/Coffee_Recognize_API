@@ -109,6 +109,11 @@ exports.getImagesPath = (req, res, next) => {
     return res.status(201).json({ imagens: files });
 }
 
+exports.saveImagesPath = (req, res, next) => {
+    files = fs.readdirSync('./results');
+    next();
+}
+
 exports.quantify = (req, res, next) => {
     const promise = new Promise((resolve, reject) => {
         try {
