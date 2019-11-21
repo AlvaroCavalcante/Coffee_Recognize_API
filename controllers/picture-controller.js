@@ -109,14 +109,6 @@ exports.getImagesPath = (req, res, next) => {
     return res.status(201).json({ imagens: files });
 }
 
-// exports.quantify = (req, res, next) => {
-//     processQuantify().then(() => {
-//         next();
-//     }).catch(error => {
-//         return res.status(500).json({ message: error });
-//     });
-// }
-
 exports.quantify = (req, res, next) => {
     const promise = new Promise((resolve, reject) => {
         try {
