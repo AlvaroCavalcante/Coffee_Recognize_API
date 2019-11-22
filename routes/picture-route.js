@@ -28,9 +28,10 @@ const upload = multer({
 router.post('/process-and-send-email', pictureController.processImage, pictureController.saveImagesPath,
             pictureController.sendEmail, pictureController.deleteFiles, pictureController.moveToDatabase);
 
+
 router.post('/upload-gallery', upload.single('file'), pictureController.uploadGallery);
 
-router.post('/upload', upload.single('file'), pictureController.upload, pictureController.processImage, pictureController.deleteFiles, pictureController.getImagesPath);
+router.post('/upload', upload.single('file'), pictureController.upload, pictureController.processImage, pictureController.deleteFiles, pictureController.getImage);
 
 router.post('/quantify', upload.single('file'), pictureController.upload, pictureController.quantify, pictureController.deleteFiles, pictureController.deleteQuantifyFile);
 

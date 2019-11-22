@@ -75,15 +75,15 @@ function processRecognition() {
 exports.deleteFiles = (req, res, next) => {
     const directory = 'uploads';
 
-    fs.readdir(directory, (err, files) => {
-        if (err) throw err;
+    // fs.readdir(directory, (err, files) => {
+    //     if (err) throw err;
 
-        for (const file of files) {
-            fs.unlink(path.join(directory, file), err => {
-                if (err) throw err;
-            });
-        }
-    });
+    //     for (const file of files) {
+    //         fs.unlink(path.join(directory, file), err => {
+    //             if (err) throw err;
+    //         });
+    //     }
+    // });
 
     next();
 }
@@ -100,13 +100,23 @@ exports.deleteQuantifyFile = (req, res, next) => {
             });
         }
     });
-    
-    return res.status(201).json({ message: 'sucess'})
+
+    return res.status(201).json({ message: 'sucess' })
 }
 
-exports.getImagesPath = (req, res, next) => {
-    files = fs.readdirSync('./results');
-    return res.status(201).json({ imagens: files });
+exports.getImage = (req, res, next) => {
+    file = fs.readdirSync('./results');
+
+    if (file.length === 0) {
+        return res.status(404).send({ msg: 'there is no image on directory' });
+    } else {
+        const path = './results/' + file[0];
+
+        var bitmap = fs.readFileSync(path);
+
+        image = new Buffer(bitmap).toString('base64');
+        return res.status(201).send({ msg: image })
+    }
 }
 
 exports.saveImagesPath = (req, res, next) => {
@@ -123,7 +133,7 @@ exports.quantify = (req, res, next) => {
 
             pythonProcess.stdout.on('data', (data) => {
                 var dados = `${data}`
-                return res.status(200).json({ message:  dados})
+                return res.status(200).json({ message: dados })
             });
 
             pythonProcess.on('close', (code) => {
@@ -203,5 +213,5 @@ exports.sendEmail = (req, res, next, ) => {
     //         // email: req.body.email,
     //     }
     // });
-    next();    
+    next();
 }
