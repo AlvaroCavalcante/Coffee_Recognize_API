@@ -63,12 +63,12 @@ try:
         return number
 
     def get_xml_number():
-        file_list_xml = get_files_on_directory('home/alvaro/Coffee_Recognize_API/xml') # TODO: ADICIONAR VALIDAÇÃO PELA CONTAGEM DO XML
+        file_list_xml = get_files_on_directory('home/alvaro/Coffee_Recognize_API/xml') 
 
-        if len(file_list_xml) == 0:
+        if len(file_list_xml) == 0: # vou ter que comparar o número do último xml
             return 1
         else:
-            return len(file_list_xml) + 1
+            return len(file_list_xml)
 
     def get_file_name():
         file_list = get_files_on_directory('home/alvaro/Coffee_Recognize_API/results')
