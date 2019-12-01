@@ -848,15 +848,17 @@ def visualize_boxes_and_labels_on_image_array(
                         classes[i] % len(STANDARD_COLORS)]
 
     array_position = []
+    im_height, im_width, shape = image.shape
+
     # Draw all boxes onto image.
     for box, color in box_to_color_map.items():
         ymin, xmin, ymax, xmax = box
         dict_position = {'xmin': 0, 'xmax': 0, 'ymin': 0, 'ymax': 0}
 
-        dict_position['ymin'] = ymin
-        dict_position['xmin'] = xmin
-        dict_position['ymax'] = ymax
-        dict_position['ymax'] = xmax
+        dict_position['ymin'] = ymin * im_height
+        dict_position['xmin'] = xmin * im_width
+        dict_position['ymax'] = ymax * im_height
+        dict_position['xmax'] = xmax * im_width
 
         array_position.append(dict_position)
 
@@ -892,9 +894,7 @@ def visualize_boxes_and_labels_on_image_array(
                 use_normalized_coordinates=use_normalized_coordinates)
     
     if new_xml != False:
-      height, width, shape = image.shape
-
-      xml = generate_xml.GenerateXml(array_position, width, height, class_name)
+      xml = generate_xml.GenerateXml(array_position, im_width, im_height, class_name)
       xml.gerenate_basic_structure()
 
     return image
