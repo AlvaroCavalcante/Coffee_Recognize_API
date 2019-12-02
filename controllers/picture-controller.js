@@ -149,69 +149,51 @@ exports.quantify = (req, res, next) => {
     return promise;
 }
 
-exports.moveToDatabase = (req, res, next) => {
-    var newPath = '/home/alvaro/Coffee_Recognize_API/database'
-    var oldPath = '/home/alvaro/Coffee_Recognize_API/uploads'
+exports.sendEmail = (req, res, next, ) => {
+    const directory = 'results';
 
-    fileList = fs.readdirSync(oldPath)
+    fs.readdir(directory, (err, files) => {
 
-    fileList.forEach(file => {
-        filePath = oldPath + '/' + file
-        newFile = newPath + '/' + file
-        fs.rename(filePath, newFile, function (err) {
-            if (err) throw err
-        })
+        email_content = `Olá Álvaro tudo bem? <br><br>
+                Segue abaixo o resultado da analise foliar<br><br>
+                Atenciosamente,<br>
+                Álvaro Leandro e Lucas Brito `;
+
+        const attach = [];
+
+        for (const file of files) {
+            let content = path.join(directory, file);
+
+            email_content += "<img style='display:none' src=" + file + "/><br><br>";
+
+            attach.push({
+                filename: file,
+                path: './' + content,
+                cid: file
+            })
+        }
+
+        var mailOptions = {
+            from: 'no-reply<geral@nkodontologia.com.br>',
+            // to: req.body.email,
+            to: 'leandro0807@live.com',
+            subject: 'Resultado da análise foliar',
+            html: email_content,
+            attachments: attach
+        };
+
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            }
+        });
     });
 
-    return res.status(201).json({ imagens: files });
-}
-
-exports.sendEmail = (req, res, next, ) => {
-    // const directory = 'results';
-
-    // fs.readdir(directory, (err, files) => {
-
-    //     email_content = `Olá Álvaro tudo bem? <br><br>
-    //             Segue abaixo o resultado da analise foliar<br><br>
-    //             Atenciosamente,<br>
-    //             Álvaro Leandro e Lucas Brito `;
-
-    //     const attach = [];
-
-    //     for (const file of files) {
-    //         let content = path.join(directory, file);
-
-    //         email_content += "<img style='display:none' src=" + file + "/><br><br>";
-
-    //         attach.push({
-    //             filename: file,
-    //             path: './' + content,
-    //             cid: file
-    //         })
-    //     }
-
-    //     var mailOptions = {
-    //         from: 'no-reply<geral@nkodontologia.com.br>',
-    //         // to: req.body.email,
-    //         to: 'leandro0807@live.com',
-    //         subject: 'Resultado da análise foliar',
-    //         html: email_content,
-    //         attachments: attach
-    //     };
-
-    //     transporter.sendMail(mailOptions, function (error, info) {
-    //         if (error) {
-    //             console.log(error);
-    //         }
-    //     });
-    // });
-
-    // return res.status(201).json({
-    //     error: null,
-    //     response: {
-    //         message: 'Relatório enviado',
-    //         // email: req.body.email,
-    //     }
-    // });
-    next();
+    return res.status(201).json({
+        error: null,
+        response: {
+            message: 'Relatório enviado',
+            // email: req.body.email,
+        }
+    });
 }
