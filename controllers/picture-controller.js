@@ -73,7 +73,7 @@ function processRecognition() {
 }
 
 exports.deleteFiles = (req, res, next) => {
-    const directory = 'uploads';
+    const directory = 'results';
 
     fs.readdir(directory, (err, files) => {
         if (err) throw err;
@@ -151,7 +151,7 @@ exports.quantify = (req, res, next) => {
 
 exports.moveToDatabase = (req, res, next) => {
     var newPath = '/home/alvaro/Coffee_Recognize_API/database'
-    var oldPath = '/home/alvaro/Coffee_Recognize_API/results'
+    var oldPath = '/home/alvaro/Coffee_Recognize_API/uploads'
 
     fileList = fs.readdirSync(oldPath)
 

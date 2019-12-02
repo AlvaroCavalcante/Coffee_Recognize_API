@@ -63,23 +63,22 @@ try:
         return number
 
     def get_xml_number():
-        file_list_xml = get_files_on_directory('home/alvaro/Coffee_Recognize_API/xml') 
+        file_list_xml = get_files_on_directory(
+            'home/alvaro/Coffee_Recognize_API/xml')
 
-        if len(file_list_xml) == 0: # vou ter que comparar o número do último xml
+        if len(file_list_xml) == 0:  # vou ter que comparar o número do último xml
             return 1
         else:
             return len(file_list_xml)
 
     def get_file_name():
-        file_list = get_files_on_directory('home/alvaro/Coffee_Recognize_API/results')
+        file_list = get_files_on_directory(
+            'home/alvaro/Coffee_Recognize_API/database')
 
         if len(file_list) == 0:
-            number_file = get_xml_number()
-            return number_file
+            return 1
         else:
-            last_file = file_list[(len(file_list) - 1)]
-            number_file = get_file_number(last_file)
-            return int(number_file) + 1
+            return len(file_list)
 
     def get_files_on_directory(path):
         directory = os.path.basename(path)
@@ -139,6 +138,7 @@ try:
                     output_dict['detection_masks'] = output_dict['detection_masks'][0]
         return output_dict
 
+    count = 0
     for image_path in TEST_IMAGE_PATHS:
         image = Image.open(image_path)
 
@@ -172,8 +172,14 @@ try:
         plt.axis('off')
         plt.imshow(image_np)
 
-        plt.savefig('results/image_' + str(get_file_name()) +
-                    '.jpg', bbox_inches='tight')
+        plt.savefig('results/image_' + str(count) + '.jpg', bbox_inches='tight')
+        count += 1
+
+    number = get_file_name()
+
+    for i in TEST_IMAGE_PATHS:
+        os.rename(i, 'database/image_' + str(number) + '.jpg')
+        number += 1
 
 except Exception as error:
     print(error)
