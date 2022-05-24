@@ -1,2 +1,2 @@
-tensorflow-gpu==1.15.2
+tensorflow-gpu==2.6.4
 matplotlib==2.1.1
